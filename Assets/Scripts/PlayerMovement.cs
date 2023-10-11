@@ -8,6 +8,7 @@ public class PlayerMovement : MonoBehaviour
     public float moveSpeed;
     private float xInput;
     private float yInput;
+
     private void Awake()
     {
         rigidbody = GetComponent<Rigidbody2D>();
@@ -25,14 +26,14 @@ public class PlayerMovement : MonoBehaviour
     void RotateBall( )
     {
         xInput = Input.GetAxis("Horizontal");
-        yInput = Input.GetAxis("Vertical");
     }
 
     void Move()
     {
-        rigidbody.AddForce(new Vector2(
+        rigidbody.AddForce(new Vector3(
             xInput,
-            yInput
+            0f,
+            0f
             )*moveSpeed);
     }
 }
