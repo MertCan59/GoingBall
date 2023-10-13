@@ -9,12 +9,12 @@ public class PlayerMovement : MonoBehaviour
     private float xInput;
     private float yInput;
 
-    private new Rigidbody2D rigidbody; 
+    private new Rigidbody2D rigidbody;
+    private CircleCollider2D circleCollider;
+    private Transform player;
+
     [SerializeField] private LayerMask platformsLayerMask;
-    [SerializeField] private Transform player;
-    [SerializeField] private CircleCollider2D circleCollider;
-
-
+    
     [Header("Horizontal Move Settings")]
     public float moveSpeed;
 
@@ -26,6 +26,7 @@ public class PlayerMovement : MonoBehaviour
     {
         rigidbody = GetComponent<Rigidbody2D>();
         circleCollider = GetComponent<CircleCollider2D>();
+        player=GetComponent<Transform>();
     }
     private void Update()
     {
@@ -39,7 +40,6 @@ public class PlayerMovement : MonoBehaviour
 
     void InputCaller()
     {
-
         xInput = Input.GetAxis("Horizontal");
         yInput = Input.GetAxis("Jump");
     }
@@ -56,6 +56,7 @@ public class PlayerMovement : MonoBehaviour
         grounded = Physics2D.OverlapCircle(player.position,circleCollider.radius,platformsLayerMask);
         if(yInput>0f &&grounded)
         {
+            
             rigidbody.velocity = new Vector2(rigidbody.velocity.x, jumpForce);
         }        
     }
