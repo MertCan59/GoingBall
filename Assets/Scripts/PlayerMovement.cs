@@ -1,6 +1,7 @@
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private LayerMask platformsLayerMask;
     [SerializeField] private Transform player;
     [SerializeField] private CircleCollider2D circleCollider;
+
 
     [Header("Horizontal Move Settings")]
     public float moveSpeed;
@@ -56,5 +58,13 @@ public class PlayerMovement : MonoBehaviour
         {
             rigidbody.velocity = new Vector2(rigidbody.velocity.x, jumpForce);
         }        
+    }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Finish"))
+        {
+
+            GameManager.instance.NewGame();
+        }
     }
 }
