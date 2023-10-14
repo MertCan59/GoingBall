@@ -5,6 +5,7 @@ using UnityEngine;
 public class CameraFollow : MonoBehaviour
 {
     [SerializeField] private Transform player;
+    
         void Start()
     {
         player = GameObject.FindWithTag("Player").transform;

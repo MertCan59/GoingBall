@@ -28,10 +28,6 @@ public class PlayerMovement : MonoBehaviour
         circleCollider = GetComponent<CircleCollider2D>();
         player=GetComponent<Transform>();
     }
-    private void Update()
-    {
-        InputCaller();
-    }
     private void FixedUpdate()
     {
         GroundMovement();
@@ -45,27 +41,21 @@ public class PlayerMovement : MonoBehaviour
     }
     void Move()
     {
+        InputCaller();
         rigidbody.AddForce(new Vector3(
-            xInput,
+            xInput * moveSpeed,
             0f,
             0f
-            )*moveSpeed);
+            ));
     }
     void GroundMovement()
     {
+        InputCaller();
         grounded = Physics2D.OverlapCircle(player.position,circleCollider.radius,platformsLayerMask);
         if(yInput>0f &&grounded)
         {
             
             rigidbody.velocity = new Vector2(rigidbody.velocity.x, jumpForce);
         }        
-    }
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Finish"))
-        {
-
-            GameManager.instance.NewGame();
-        }
     }
 }
